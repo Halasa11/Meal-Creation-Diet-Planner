@@ -1,0 +1,743 @@
+/* Base Styles - Reset default margins and set global font and background */
+body {
+    font-family: Arial, sans-serif; /* Use Arial or fallback to sans-serif */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    background: #f8f9fa; /* Light gray background */
+    color: #333; /* Dark gray text color */
+}
+
+/* Prevent horizontal scrolling across the entire site */
+html, body {
+    max-width: 100%; /* Limit width to viewport */
+    overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+/* Container for sidebar and main content, using flexbox for layout */
+.container {
+    display: flex; /* Enable flexbox layout */
+    width: 100%; /* Full width */
+    min-height: 100vh; /* Minimum height of viewport */
+}
+
+/* Sidebar Styles - Fixed sidebar for navigation */
+.sidebar {
+    width: 240px; /* Fixed width */
+    background: linear-gradient(to bottom, #1f2937, #374151); /* Gradient background from dark to lighter gray */
+    color: white; /* White text */
+    padding: 1.5rem; /* Internal padding */
+    display: flex; /* Flexbox for vertical layout */
+    flex-direction: column; /* Stack items vertically */
+    height: 100vh; /* Full viewport height */
+    position: fixed; /* Fixed position on left */
+    left: 0; /* Align to left edge */
+    z-index: 10; /* Ensure sidebar is above content */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+    box-sizing: border-box; /* Include padding in width calculation */
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out; /* Smooth transitions for transform and width */
+}
+
+/* Sidebar heading styles */
+.sidebar h2 {
+    margin-bottom: 2rem; /* Space below heading */
+    font-size: 1.4rem; /* Larger font size */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle bottom border */
+    padding-bottom: 10px; /* Space below text */
+}
+
+/* Sidebar navigation list styles */
+.sidebar nav ul {
+    list-style: none; /* Remove default list bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+/* Sidebar navigation item styles */
+.sidebar nav ul li {
+    padding: 12px; /* Internal padding */
+    margin-bottom: 5px; /* Space between items */
+    border-radius: 5px; /* Rounded corners */
+    transition: all 0.3s; /* Smooth transition for hover effects */
+    cursor: pointer; /* Indicate clickable item */
+}
+
+/* Hover and active states for sidebar items */
+.sidebar nav ul li:hover, 
+.sidebar nav ul .active {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+}
+
+/* Sidebar navigation link styles */
+.sidebar nav ul li a {
+    color: white; /* White text */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Full-width clickable area */
+    width: 100%; /* Ensure full width */
+}
+
+/* Sidebar toggle button for mobile view */
+.sidebar-toggle {
+    display: none; /* Hidden by default (shown on mobile) */
+    position: fixed; /* Fixed position */
+    top: 50%; /* Center vertically */
+    left: 0; /* Align to left edge */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    z-index: 11; /* Above sidebar */
+    background: rgba(31, 41, 55, 0.95); /* Dark background */
+    color: white; /* White text/icon */
+    border: none; /* No border */
+    border-radius: 0 5px 5px 0; /* Rounded corners on right side */
+    width: 30px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    cursor: pointer; /* Indicate clickable */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: left 0.3s ease-in-out; /* Smooth transition for position */
+}
+
+/* Active state for sidebar toggle (when sidebar is open) */
+.sidebar-toggle.active {
+    left: calc(80% - 12px); /* Position at right edge of sidebar (80% width) */
+}
+
+/* Chevron icon for sidebar toggle */
+.sidebar-toggle:before {
+    content: "\276F"; /* Right chevron (›) when sidebar is closed */
+    display: flex; /* Flexbox for centering */
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    height: 100%; /* Full button height */
+    color: white; /* White icon */
+    font-family: Arial, sans-serif; /* Ensure font supports Unicode */
+    font-size: 18px; /* Icon size */
+    line-height: 50px; /* Match button height for centering */
+    transition: transform 0.3s ease; /* Smooth icon transition */
+}
+
+/* Chevron icon when sidebar is open */
+.sidebar-toggle.active:before {
+    content: "\276E"; /* Left chevron (‹) when sidebar is open */
+}
+
+/* Main Content Area - Adjusts to accommodate sidebar */
+.content {
+    margin-left: 250px; /* Offset for sidebar width */
+    width: calc(100% - 250px); /* Remaining width after sidebar */
+    padding: 2rem; /* Internal padding */
+    display: flex; /* Flexbox for content layout */
+    flex-direction: column; /* Stack content vertically */
+    align-items: flex-start; /* Align items to start */
+    min-height: 100vh; /* Full viewport height */
+}
+
+/* Section styles for content areas */
+.section {
+    width: 100%; /* Full width */
+}
+
+/* Calculator Form Styles */
+.calculator-form {
+    max-width: 800px; /* Limit form width */
+    margin: 0 auto; /* Center horizontally */
+    background: white; /* White background */
+    padding: 30px; /* Internal padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    width: 100%; /* Full width within max-width */
+}
+
+/* Form label styles */
+.calculator-form label {
+    font-weight: bold; /* Bold text */
+    margin: 15px 0 8px; /* Spacing above and below */
+    display: block; /* Full-width block */
+}
+
+/* Form input and select styles */
+.calculator-form input,
+.calculator-form select {
+    width: 100%; /* Full width */
+    padding: 12px; /* Internal padding */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Readable font size */
+}
+
+/* Range input styles */
+.calculator-form input[type="range"] {
+    width: 100%; /* Full width */
+    margin: 10px 0; /* Vertical spacing */
+}
+
+/* Button Groups for Goal and Diet Options */
+.goal-options,
+.diet-options {
+    display: flex; /* Flexbox for button layout */
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 10px; /* Space between buttons */
+    margin: 10px 0; /* Vertical spacing */
+}
+
+/* Individual Goal and Diet Button Styles */
+.goal-btn,
+.diet-btn {
+    flex: 1 1 calc(20% - 10px); /* Flexible width with gap adjustment */
+    min-width: 120px; /* Minimum width */
+    padding: 12px; /* Internal padding */
+    text-align: center; /* Center text */
+    border: none; /* No border */
+    cursor: pointer; /* Indicate clickable */
+    border-radius: 5px; /* Rounded corners */
+    background: #ddd; /* Light gray background */
+    transition: all 0.3s; /* Smooth transition for hover effects */
+}
+
+/* Hover effect for goal and diet buttons */
+.goal-btn:hover,
+.diet-btn:hover {
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Active state for goal buttons */
+.goal-btn.active {
+    background: #2563eb; /* Blue background */
+    color: white; /* White text */
+}
+
+/* Active state for diet buttons */
+.diet-btn.active {
+    background: #2563eb; /* Green background */
+    color: white; /* White text */
+}
+
+/* Calculate Button Styles */
+.calculate-btn {
+    background: linear-gradient(to right, #2563eb, #4f46e5); /* Blue gradient */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+    padding: 15px; /* Internal padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Indicate clickable */
+    transition: all 0.3s; /* Smooth transition for hover effects */
+    width: 100%; /* Full width */
+    max-width: 300px; /* Limit width */
+    margin-left: auto; /* center button */
+    margin-right: auto; /* center button */
+    display: block; /* Block-level element */
+}
+
+/* Hover effect for calculate button */
+.calculate-btn:hover {
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4); /* Subtle shadow */
+}
+
+/* Diet Plan Table Container */
+#diet-plan {
+    width: 100%; /* Full width */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+
+/* Nutrition Requirements Display */
+.nutrition-requirements {
+    display: flex; /* Flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 15px; /* Space between items */
+    background-color: #f0f8ff; /* Light blue background */
+    padding: 15px; /* Internal padding */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 20px; /* Space below */
+}
+
+/* Nutrition requirements paragraph styles */
+.nutrition-requirements p {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: inline-block; /* Inline-block for flex layout */
+}
+
+/* Legend for meal color coding */
+.macro-legend {
+    margin-bottom: 20px;
+}
+
+.macro-legend h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #2563eb;
+}
+
+.macro-legend ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.macro-legend li {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.macro-legend li.macro-protein,
+.macro-legend li.macro-carbs,
+.macro-legend li.macro-fats {
+    border-left: 4px solid;
+}
+
+.macro-legend li.macro-protein {
+    background-color: rgba(255, 99, 132, 0.15);
+    border-left-color: rgb(255, 99, 132);
+}
+
+.macro-legend li.macro-carbs {
+    background-color: rgba(75, 192, 192, 0.15);
+    border-left-color: rgb(75, 192, 192);
+}
+
+.macro-legend li.macro-fats {
+    background-color: rgba(54, 162, 235, 0.15);
+    border-left-color: rgb(54, 162, 235);
+}
+
+.macro-legend li.macro-none {
+    background-color: #f0f0f0;
+}
+
+/* Table styles for meal plan */
+table {
+    border-collapse: collapse; /* Merge borders */
+    width: 100%; /* Full width */
+    margin-top: 20px; /* Space above */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Clip content to rounded corners */
+    min-width: 800px; /* Minimum width for readability */
+}
+
+/* Table header styles */
+th {
+    background: linear-gradient(to right, #2563eb, #4f46e5); /* Blue gradient */
+    color: white; /* White text */
+    padding: 15px; /* Internal padding */
+    font-weight: 600; /* Semi-bold text */
+    text-align: left; /* Left-align text */
+}
+
+/* Table cell styles */
+td {
+    padding: 20px; /* Internal padding */
+    border: 1px solid #eee; /* Light gray border */
+    vertical-align: top; /* Align content to top */
+    text-align: left; /* Left-align text */
+}
+
+/* Alternating row background for readability */
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray background */
+}
+
+/* Hover effect for table rows */
+tr:hover {
+    background-color: #f0f0f0; /* Slightly darker gray */
+}
+
+/* Meal Macro Highlighting - Visual cues for dominant macronutrients */
+.macro-protein {
+    background-color: rgba(255, 99, 132, 0.15); /* Light red background */
+    border-left: 4px solid rgb(255, 99, 132); /* Red left border */
+}
+
+.macro-carbs {
+    background-color: rgba(75, 192, 192, 0.15); /* Light teal background */
+    border-left: 4px solid rgb(75, 192, 192); /* Teal left border */
+}
+
+.macro-fats {
+    background-color: rgba(54, 162, 235, 0.15); /* Light blue background */
+    border-left: 4px solid rgb(54, 162, 235); /* Blue left border */
+}
+
+.macro-none {
+    background-color: #f0f0f0; /* Light gray background */
+}
+
+/* Food Item Tooltips - Display nutritional info on hover */
+.food-item {
+    position: relative; /* Position relative for absolute tooltip */
+    display: inline-block; /* Inline-block for layout */
+}
+
+.food-item .tooltip {
+    visibility: hidden; /* Hidden by default */
+    width: 250px; /* Fixed width */
+    background-color: #333; /* Dark background */
+    color: #fff; /* White text */
+    text-align: center; /* Center text */
+    border-radius: 6px; /* Rounded corners */
+    padding: 10px; /* Internal padding */
+    position: absolute; /* Position above item */
+    z-index: 100; /* Above other content */
+    bottom: 125%; /* Position above item */
+    left: 50%; /* Center horizontally */
+    margin-left: -125px; /* Adjust for centering */
+    opacity: 0; /* Initially transparent */
+    transition: opacity 0.3s, transform 0.3s; /* Smooth transition */
+    transform: translateY(10px); /* Slight offset when hidden */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+/* Show tooltip on hover */
+.food-item:hover .tooltip {
+    visibility: visible; /* Show tooltip */
+    opacity: 1; /* Fully opaque */
+    transform: translateY(0); /* Remove offset */
+}
+
+/* Tooltip arrow */
+.food-item .tooltip::after {
+    content: ""; /* Empty content for arrow */
+    position: absolute; /* Position below tooltip */
+    top: 100%; /* Align to bottom */
+    left: 50%; /* Center horizontally */
+    margin-left: -5px; /* Adjust for centering */
+    border-width: 5px; /* Arrow size */
+    border-style: solid; /* Solid border for arrow */
+    border-color: #333 transparent transparent transparent; /* Dark top, transparent sides */
+}
+
+/* Login/Register Page Styles */
+.container.auth-container {
+    max-width: 500px; /* Limit width */
+    margin: 80px auto; /* Center with top margin */
+    padding: 30px; /* Internal padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: white; /* White background */
+    display: block; /* Block-level element */
+}
+
+/* Auth container heading styles */
+.auth-container h2 {
+    text-align: center; /* Center text */
+    margin-bottom: 30px; /* Space below */
+    color: #2563eb; /* Blue text */
+}
+
+/* Auth form styles */
+.auth-container form {
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stack inputs vertically */
+    width: 100%;
+}
+
+/* Auth form label styles */
+.auth-container label {
+    margin: 10px 0 5px; /* Spacing above and below */
+    font-weight: bold; /* Bold text */
+    display: block;
+    width: 100%;
+}
+
+/* Auth form input styles */
+.auth-container input {
+    padding: 12px; /* Internal padding */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 15px; /* Space below */
+    width: 100%; /* Full width */
+    box-sizing: border-box;
+}
+
+/* Auth form button styles */
+.auth-container button {
+    margin-top: 15px; /* Space above */
+    padding: 12px; /* Internal padding */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Auth container paragraph styles */
+.auth-container p {
+    text-align: center; /* Center text */
+    margin-top: 20px; /* Space above */
+}
+
+/* Auth container link styles */
+.auth-container a {
+    color: #2563eb; /* Blue text */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Hover effect for auth links */
+.auth-container a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Alert Styles for Success/Error Messages */
+.alert {
+    padding: 15px; /* Internal padding */
+    margin-bottom: 20px; /* Space below */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: 500; /* Medium-bold text */
+}
+
+/* Success alert styles */
+.alert.success {
+    background-color: #d1fae5; /* Light green background */
+    color: #065f46; /* Dark green text */
+    border-left: 4px solid #34d399; /* Green left border */
+}
+
+/* Error alert styles */
+.alert.error {
+    background-color: #fee2e2; /* Light red background */
+    color: #991b1b; /* Dark red text */
+    border-left: 4px solid #f87171; /* Red left border */
+}
+
+/* Account Management Button Styles */
+.delete-account {
+    background-color: #ef4444 !important; /* Red background */
+    color: white !important; /* White text */
+}
+
+/* Hover effect for delete account button */
+.delete-account:hover {
+    background-color: #dc2626 !important; /* Darker red */
+}
+
+/* Delete session button styles */
+.delete-session {
+    background-color: #f97316 !important; /* Orange background */
+    color: white !important; /* White text */
+}
+
+/* Hover effect for delete session button */
+.delete-session:hover {
+    background-color: #ea580c !important; /* Darker orange */
+}
+
+/* Helper Classes */
+.hidden {
+    display: none; /* Hide element */
+}
+
+.active {
+    font-weight: bold; /* Bold text for active state */
+}
+
+/* Hover Effects for Interactive Elements */
+.hover-container {
+    position: relative; /* Position relative for absolute children */
+    display: inline-block; /* Inline-block for layout */
+    font-size: 24px; /* Larger font size */
+    cursor: pointer; /* Indicate clickable */
+}
+
+/* Hover image (hidden by default) */
+.hover-container .hover-image {
+    display: none; /* Hidden by default */
+    position: absolute; /* Position relative to container */
+    top: 30px; /* Space above */
+    left: 0; /* Align to left */
+    width: 150px; /* Fixed width */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Show hover image on hover */
+.hover-container:hover .hover-image {
+    display: block; /* Show image */
+}
+
+/* Loading Button Animation */
+.loading {
+    position: relative; /* Position relative for spinner */
+    pointer-events: none; /* Disable interactions */
+    color: transparent !important; /* Hide text */
+}
+
+/* Spinner for loading state */
+.loading::after {
+    content: ''; /* Empty content for spinner */
+    position: absolute; /* Center in button */
+    width: 20px; /* Spinner size */
+    height: 20px; /* Spinner size */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    margin: -10px 0 0 -10px; /* Adjust for centering */
+    border: 3px solid rgba(255, 255, 255, 0.3); /* Light border */
+    border-radius: 50%; /* Circular shape */
+    border-top-color: #fff; /* White top border */
+    animation: spin 1s ease-in-out infinite; /* Spin animation */
+}
+
+/* Spin animation keyframes */
+@keyframes spin {
+    to { transform: rotate(360deg); } /* Full rotation */
+}
+
+/* Arrow symbol styles */
+.arrow-symbol {
+    font-size: 24px; /* Larger font size */
+    margin-right: 6px; /* Space to right */
+    transform: translateY(-1px); /* Slight vertical adjustment */
+    display: inline-block; /* Inline-block for layout */
+}
+
+/* Back arrow styles */
+.back-arrow {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* System font stack */
+    font-size: 17px; /* Font size */
+    position: absolute; /* Position in container */
+    top: 20px; /* Space from top */
+    left: 20px; /* Space from left */
+    font-size: 1.5rem; /* Larger font size */
+    text-decoration: none; /* Remove underline */
+    color: #2563eb; /* Blue text */
+    display: inline-flex; /* Flexbox for alignment */
+    align-items: center; /* Center vertically */
+}
+
+/* Hover effect for back arrow */
+.back-arrow:hover {
+    opacity: 0.7; /* Reduce opacity */
+}
+
+/* Adjust container padding to accommodate back arrow */
+.container.auth-container {
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    display: block;
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+/* Print Styles - Optimize for printing */
+@media print {
+    .sidebar {
+        display: none; /* Hide sidebar */
+    }
+    .content {
+        margin-left: 0; /* Remove sidebar offset */
+        width: 100%; /* Full width */
+        padding: 0; /* Remove padding */
+    }
+    button {
+        display: none; /* Hide buttons */
+    }
+    .calculate-btn {
+        display: none; /* Hide calculate button */
+    }
+    h3 {
+        display: none; /* Hide the legend title */
+    }
+}
+
+/* Responsive Styles for Tablets */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 200px; /* Narrower sidebar */
+    }
+    .content {
+        margin-left: 200px; /* Adjust offset */
+        width: calc(100% - 200px); /* Adjust width */
+    }
+}
+
+/* Responsive Styles for Mobile Devices */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack vertically */
+    }
+    .container.auth-container {
+        width: 90%; /* Slightly narrower */
+        max-width: 450px; /* Limit width */
+        margin: 50px auto; /* Center with top margin */
+        padding: 20px; /* Reduced padding */
+        overflow: hidden; /* Prevent overflow */
+    }
+    .sidebar {
+        position: fixed; /* Fixed position */
+        top: 0; /* Align to top */
+        left: 0; /* Align to left */
+        width: 80%; /* 80% of viewport */
+        max-width: 300px; /* Limit width */
+        height: 100vh; /* Full height */
+        z-index: 100; /* Above content */
+        transform: translateX(-100%); /* Hidden off-screen */
+    }
+    .sidebar.active {
+        transform: translateX(0); /* Show sidebar */
+    }
+    .sidebar-toggle {
+        display: flex; /* Show toggle button */
+        align-items: center; /* Center content */
+        justify-content: center; /* Center content */
+    }
+    .content {
+        margin-left: 0; /* Remove sidebar offset */
+        width: 100%; /* Full width */
+        padding: 1rem; /* Reduced padding */
+        padding-top: 60px; /* Space for header */
+        box-sizing: border-box; /* Include padding in width */
+        overflow-x: hidden; /* Prevent horizontal overflow */
+    }
+    .goal-options, 
+    .diet-options {
+        flex-direction: column; /* Stack buttons vertically */
+    }
+    .goal-btn, 
+    .diet-btn {
+        width: 100%; /* Full width */
+        margin: 5px 0; /* Vertical spacing */
+    }
+    body {
+        overflow-x: hidden; /* Prevent horizontal overflow */
+    }
+    .overlay {
+        display: none; /* Hidden by default */
+        position: fixed; /* Cover entire viewport */
+        top: 0; /* Align to top */
+        left: 0; /* Align to left */
+        right: 0; /* Align to right */
+        bottom: 0; /* Align to bottom */
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+        z-index: 90; /* Below sidebar */
+    }
+    .overlay.active {
+        display: block; /* Show overlay */
+    }
+    .calculator-form {
+        width: 100%; /* Full width */
+        max-width: 100%; /* No max-width limit */
+        padding: 15px; /* Reduced padding */
+        box-sizing: border-box; /* Include padding in width */
+    }
+    .calculator-form input,
+    .calculator-form select {
+        max-width: 100%; /* Full width */
+        box-sizing: border-box; /* Include padding in width */
+    }
+    .container, .section {
+        max-width: 100vw; /* Full viewport width */
+        overflow-x: hidden; /* Prevent horizontal overflow */
+        box-sizing: border-box; /* Include padding in width */
+    }
+    .macro-legend ul {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px; /* Set vertical spacing between items */
+    }
+    .macro-legend li {
+        width: 100%; /* Each legend takes full width */
+        box-sizing: border-box; /* Include padding in width */
+    }
+}

@@ -1,0 +1,51 @@
+user_id,diet,compliance_rate,compliant_meals,total_meals,non_compliant_details,weight,height,age,gender,activity,goal,cross_category_percentage
+1,Pescatarian,100,21,21,[],84.01298394186594,161.7319870582161,47,female,Heavy,Maintain Muscle Mass,70
+2,Vegetarian,100,21,21,[],52.444980364662314,158.97036324463258,56,male,Light,Build Muscle,28
+3,Vegetarian,100,21,21,[],64.62807579661474,168.55921205227557,37,male,Moderate,Maintain Weight,11
+4,Pescatarian,100,21,21,[],81.72701658946556,151.93352301053002,47,female,Very Light,Lose Fat,70
+5,Pescatarian,100,21,21,[],53.65993436811116,181.00899640993708,54,female,Light,Maintain Muscle Mass,11
+6,Vegan,100,21,21,[],73.10427182758346,187.90876687644197,60,male,Very Light,Build Muscle,3
+7,Vegetarian,100,21,21,[],81.54410457,172.05919548466196,45,male,Moderate,Maintain Weight,49
+8,Vegan,100,21,21,[],94.20413442149649,180.31806385307564,38,female,Very Light,Build Muscle,52
+9,Vegetarian,100,21,21,[],56.36471325960661,157.9763111168074,50,female,Heavy,Build Muscle,59
+10,Omnivore,100,21,21,[],50.81859315052601,172.18439802920827,56,female,Light,Build Muscle,30
+11,Pescatarian,100,21,21,[],74.28878082862292,155.2233077768798,30,female,Extremely active,Lose Fat,98
+12,Vegan,100,21,21,[],75.99082015443472,169.6664079194605,22,female,Heavy,Maintain Muscle Mass,3
+13,Vegetarian,100,21,21,[],61.86589629702076,159.67841724526622,19,male,Light,Lose Fat,2
+14,Vegetarian,100,21,21,[],50.161915971592734,169.97072390809925,43,male,Heavy,Lose Fat,89
+15,Pescatarian,100,21,21,[],65.75427658207661,161.87163751729975,38,male,Heavy,Athlete,82
+16,Pescatarian,100,21,21,[],90.04797601069089,161.36244822422182,54,female,Extremely active,Lose Fat,36
+17,Vegetarian,100,21,21,[],72.98943657771227,164.35589000705178,30,male,Heavy,Build Muscle,77
+18,Omnivore,100,21,21,[],95.41696362848799,167.10886115315753,42,female,Light,Maintain Muscle Mass,7
+19,Vegan,100,21,21,[],54.07006967496962,168.37328621053317,31,male,Light,Maintain Muscle Mass,91
+20,Pescatarian,100,21,21,[],65.22722605915517,154.93090856974695,24,female,Light,Athlete,81
+21,Vegan,100,21,21,[],63.146863914849305,180.46046681464685,57,male,Heavy,Lose Fat,46
+22,Vegan,100,21,21,[],96.54889742183953,161.5053773079928,23,male,Light,Build Muscle,69
+23,Vegan,100,21,21,[],87.96807752068813,164.07965225609354,27,male,Light,Maintain Muscle Mass,99
+24,Pescatarian,100,21,21,[],82.43314696295448,178.79340446443672,19,female,Moderate,Build Muscle,80
+25,Vegetarian,100,21,21,[],76.97394395067988,155.0552589024506,60,male,Moderate,Athlete,50
+26,Omnivore,100,21,21,[],88.60549103878907,183.53720242294185,20,male,Heavy,Build Muscle,19
+27,Pescatarian,100,21,21,[],71.06978822396971,157.59373515812888,60,male,Moderate,Build Muscle,89
+28,Vegetarian,100,21,21,[],54.33351553912757,158.64270764511912,22,male,Very Light,Lose Fat,25
+29,Omnivore,100,21,21,[],64.69576244,156.40395109462858,23,female,Moderate,Maintain Muscle Mass,33
+30,Vegetarian,100,21,21,[],86.21588413862119,182.44027941173624,45,male,Light,Maintain Muscle Mass,36
+31,Vegetarian,100,21,21,[],81.06487872900057,176.33184048166356,35,female,Light,Maintain Muscle Mass,32
+32,Omnivore,100,21,21,[],72.66571661729543,153.5169751853704,29,male,Light,Athlete,18
+33,Omnivore,100,21,21,[],72.68373533463371,186.93000428908377,48,female,Extremely active,Lose Fat,72
+34,Vegetarian,100,21,21,[],69.84568014432057,170.2808161512586,28,female,Light,Maintain Muscle Mass,11
+35,Vegetarian,100,21,21,[],66.54744448714942,162.46190222743903,53,female,Light,Build Muscle,17
+36,Pescatarian,100,21,21,[],84.22941385828011,150.6455530142225,37,male,Extremely active,Athlete,88
+37,Pescatarian,100,21,21,[],58.67683952139397,151.23707103489943,31,male,Heavy,Build Muscle,81
+38,Pescatarian,100,21,21,[],88.80513483610619,162.39878135043108,46,female,Extremely active,Lose Fat,12
+39,Pescatarian,100,21,21,[],99.75270320878197,179.3155996253388,36,male,Very Light,Maintain Weight,23
+40,Vegan,100,21,21,[],99.03494720510689,163.56931774190562,34,female,Light,Build Muscle,62
+41,Pescatarian,100,21,21,[],72.20496337013238,173.8772085818963,32,male,Moderate,Maintain Weight,63
+42,Vegan,100,21,21,[],91.25964225058561,179.9323931531905,51,male,Extremely active,Athlete,91
+43,Omnivore,100,21,21,[],60.77841306,161.8292043984365,22,female,Moderate,Maintain Weight,66
+44,Omnivore,100,21,21,[],99.32248674062616,163.6389243231306,19,female,Extremely active,Athlete,43
+45,Vegan,100,21,21,[],86.34308734,178.05628722041644,47,male,Heavy,Build Muscle,77
+46,Vegan,100,21,21,[],67.76817547903138,175.71109582854524,35,male,Extremely active,Build Muscle,28
+47,Omnivore,100,21,21,[],51.92483239534264,164.12324282934227,33,male,Extremely active,Lose Fat,60
+48,Vegetarian,100,21,21,[],77.49075841532391,156.33716096445897,26,male,Light,Athlete,77
+49,Pescatarian,100,21,21,[],96.07199787129184,182.26948285533007,19,male,Heavy,Maintain Muscle Mass,58
+50,Vegan,100,21,21,[],89.89504666366115,159.60016554036275,33,female,Very Light,Maintain Weight,32

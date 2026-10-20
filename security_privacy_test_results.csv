@@ -1,0 +1,4 @@
+metric,success_rate,successful_operations,total_operations
+Password Security,100.0,10,10
+Session Security,100.0,10,10
+Data Deletion,100.0,11,11

@@ -1,0 +1,4 @@
+metric,success_rate,successful_operations,total_operations
+Save Accuracy,100.0,10,10
+Retrieval Accuracy,100.0,10,10
+Deletion Compliance,100.0,10,10

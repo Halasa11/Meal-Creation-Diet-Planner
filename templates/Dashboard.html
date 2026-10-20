@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Set character encoding to UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- Ensure responsive design for mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page title -->
+    <title>MCDP</title>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Main container with sidebar and content -->
+    <div class="container">
+        <!-- Sidebar for navigation -->
+        <aside class="sidebar">
+            <!-- Sidebar heading -->
+            <h2>Meal Creation Diet Planner</h2>
+            <nav>
+                <ul>
+                    <!-- Navigation items -->
+                    <li class="nav-item active" data-target="calculator">Calculator</li>
+                    <li class="nav-item" data-target="diet-plan">Diet Plan</li>
+                    <li class="nav-item" data-target="help">Help</li>
+                    {% if current_user.is_authenticated %}
+                        <!-- Logout link for authenticated users -->
+                        <li class="nav-item"><a href="{{ url_for('logout') }}">Log Out</a></li>
+                        <!-- Delete account link -->
+                        <li class="nav-item"><a href="#" onclick="confirmDeleteAccount()" class="delete-account">Delete Account</a></li>
+                    {% else %}
+                        <!-- Login link for guest users -->
+                        <li class="nav-item"><a href="{{ url_for('login') }}">Login</a></li>
+                        <!-- Register link -->
+                        <li class="nav-item"><a href="{{ url_for('register') }}">Register</a></li>
+                        <!-- Delete session data link -->
+                        <li class="nav-item"><a href="#" onclick="deleteSessionData()" class="delete-session">Delete Session Data</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </aside>
+        <!-- Main content area -->
+        <main class="content">
+            <!-- Calculator Section -->
+            <div id="calculator" class="section">
+                <!-- Calculator form -->
+                <form class="calculator-form">
+                    <!-- Weight input -->
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" name="weight" min="0" step="0.1" value="{{ user_details.weight if user_details else '' }}">
+                    
+                    <!-- Height input -->
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" name="height" min="0" value="{{ user_details.height if user_details else '' }}">
+                    
+                    <!-- Age input -->
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" min="0" value="{{ user_details.age if user_details else '' }}">
+                    
+                    <!-- Gender selection -->
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender">
+                        <option value="">Select an option</option>
+                        <option value="male" {% if user_details and user_details.gender == 'male' %}selected{% endif %}>Male</option>
+                        <option value="female" {% if user_details and user_details.gender == 'female' %}selected{% endif %}>Female</option>
+                    </select>
+                    
+                    <!-- Activity level slider -->
+                    <label>Activity Level: <span id="activity-level">{{ user_details.activity if user_details else 'Moderate' }}</span></label>
+                    <input type="range" id="activity" min="1" max="5" step="1" value="{% if user_details %}{% if user_details.activity == 'Very light' %}1{% elif user_details.activity == 'Light' %}2{% elif user_details.activity == 'Moderate' %}3{% elif user_details.activity == 'Heavy' %}4{% else %}5{% endif %}{% else %}3{% endif %}">
+                    
+                    <!-- Goal selection buttons -->
+                    <label>Goal:</label>
+                    <div class="goal-options">
+                        <button type="button" class="goal-btn {% if user_details and user_details.goal == 'Maintain Weight' %}active{% endif %}">Maintain Weight</button>
+                        <button type="button" class="goal-btn {% if user_details and user_details.goal == 'Maintain Muscle Mass' %}active{% endif %}">Maintain Muscle Mass</button>
+                        <button type="button" class="goal-btn {% if user_details and user_details.goal == 'Lose Fat' %}active{% endif %}">Lose Fat</button>
+                        <button type="button" class="goal-btn {% if user_details and user_details.goal == 'Build Muscle' %}active{% endif %}">Build Muscle</button>
+                        <button type="button" class="goal-btn {% if user_details and user_details.goal == 'Athlete' %}active{% endif %}">Athlete</button>
+                    </div>
+                    
+                    <!-- Diet selection buttons -->
+                    <label>Diet:</label>
+                    <div class="diet-options">
+                        <button type="button" class="diet-btn {% if user_details and user_details.diet == 'Vegan' %}active{% endif %}">Vegan</button>
+                        <button type="button" class="diet-btn {% if user_details and user_details.diet == 'Vegetarian' %}active{% endif %}">Vegetarian</button>
+                        <button type="button" class="diet-btn {% if user_details and user_details.diet == 'Pescatarian' %}active{% endif %}">Pescatarian</button>
+                        <button type="button" class="diet-btn {% if user_details and user_details.diet == 'Omnivore' %}active{% endif %}">Omnivore</button>
+                    </div>
+                    
+                    <!-- Allergies/dislikes input -->
+                    <label for="preferences">Allergies / Dislikes:</label>
+                    <input type="text" id="preferences" name="preferences" value="{{ user_details.preferences if user_details else '' }}">
+
+                    <!-- Meal variety slider -->
+                    <label>Meal Variety: <span id="meal-variety-value">
+                        {% if user_details %}
+                            {{ user_details.meal_variety | int }}%
+                        {% else %}
+                            50%
+                        {% endif %}
+                    </span></label>
+                    <input type="range" id="meal-variety" min="0" max="100" step="5" value="{{ user_details.meal_variety | int if user_details else '50' }}">
+
+                    <!-- Submit button -->
+                    <button type="submit" class="calculate-btn">Calculate and Generate</button>
+                </form>
+            </div>
+
+            <!-- Diet Plan Section (hidden by default) -->
+            <div id="diet-plan" class="section hidden">
+                <h2>Diet Plan</h2>
+                <p>Your personalised diet plan will appear here.</p>
+            </div>
+
+            <!-- Help Section (hidden by default) -->
+            <div id="help" class="section hidden">
+                <h2>Help</h2>
+                <p>Welcome to the Meal Creation Diet Planner! This system creates random meals from random ingredients, so don't be surprised if you find a first of its own combination, you can always regenerate the day you don't like, Here's everything you need to know to fill out the calculator and make the most of your meal plan:</p>
+            
+                <h3>Weight</h3>
+                <p><strong>Required</strong> - Enter your weight in <strong>kilograms (kg)</strong>. You can use decimal numbers. Example: 70.5</p>
+            
+                <h3>Height</h3>
+                <p><strong>Required</strong> - Enter your height in <strong>centimeters (cm)</strong>. Example: 175</p>
+            
+                <h3>Age</h3>
+                <p><strong>Required</strong> - Enter your age in <strong>years</strong>. Just numbers, like 22</p>
+            
+                <h3>Gender</h3>
+                <p><strong>Required</strong> - Choose either <strong>Male</strong> or <strong>Female</strong> from the dropdown.</p>
+            
+                <h3>Activity Level</h3>
+                <p><strong>Required</strong> - Use the slider to select how active you are:</p>
+                <ul>
+                    <li>1 - Very Light: little to no exercise, office job</li>
+                    <li>2 - Light: occasional light activity, a somewhat active lifestyle</li>
+                    <li>3 - Moderate: moderate activity a few times a week, exersising 3 times a week</li>
+                    <li>4 - Heavy: daily intense workouts or a physically demanding job</li>
+                    <li>5 - Extremely Active: athlete or very high daily activity, a marathon runner is suitable</li>
+                </ul>
+            
+                <h3>Goal</h3>
+                <p><strong>Required</strong> - Click to choose one goal. It helps personalize your plan:</p>
+                <ul>
+                    <li>Maintain Weight</li>
+                    <li>Maintain Muscle Mass</li>
+                    <li>Lose Fat</li>
+                    <li>Build Muscle</li>
+                    <li>Athlete</li>
+                </ul>
+            
+                <h3>Diet Type</h3>
+                <p><strong>Required</strong> - Pick one of the following that fits your preference:</p>
+                <ul>
+                    <li>Vegan</li>
+                    <li>Vegetarian</li>
+                    <li>Pescatarian</li>
+                    <li>Omnivore</li>
+                </ul>
+            
+                <h3>Allergies & Dislikes (Optional)</h3>
+                <p>List food items you <strong>can't eat</strong>, separated by commas. Example: <code>milk, cheese, mushrooms</code>. Avoid general terms like "lactose intolerance" — stick to food names. Any word you write here will be excluded from the meal plan if it appears in the database.</p>
+            
+                <h3>Meal Variety (Optional)</h3>
+                <p>This slider decides how creative your meals get, it goes from 0% to 100%:</p>
+                <ul>
+                    <li><strong>0%</strong> - Traditional meal types (breakfast for breakfast, etc.)</li>
+                    <li><strong>50%</strong> - Some crossover</li>
+                    <li><strong>100%</strong> - Expect mixes like breakfast items in lunch! Its completely to have breakfast for dinner</li>
+                </ul>
+                <p><em>Note: "None" doesn't mean boring - just conventional combinations.</em></p>
+            
+                <h3>Calculate and Generate</h3>
+                <p>Clicking this button will:</p>
+                <ol>
+                    <li>Show your daily nutritional requirements</li>
+                    <li>Generate a 7-day personalized meal plan</li>
+                </ol>
+            
+                <h3>Meal Plan Features</h3>
+                <ul>
+                    <li>You can <strong>regenerate any day</strong> if you don't like the meals.</li>
+                    <li>Each meal has a <strong>color hue</strong> indicating the dominant macronutrient:</li>
+                    <ul>
+                        <li>Red = Protein</li>
+                        <li>Teal = Carbs</li>
+                        <li>Blue = Fats</li>
+                    </ul>
+                    <li><em>Hover over food items</em> to view detailed nutritional info (if tooltips are enabled).</li>
+                </ul>
+            
+                <h3>Logged-in Users</h3>
+                <ul>
+                    <li>Your last entered data will appear automatically next time you log in.</li>
+                    <li>Your most recent meal plan is also loaded when you sign in.</li>
+                </ul>
+            
+                <h3>Guest Users</h3>
+                <p>Your data is not saved permanently. If you refresh the page or leave, you'll need to re-enter your details.</p>
+            
+                <h3>Tip</h3>
+                <p>Your meal plan appears in the "Diet Plan" tab once generated. You can always use the sidebar to switch between sections!</p>
+            </div>
+        </main>
+    </div>
+    <!-- Link to JavaScript file -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Set character encoding to UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- Ensure responsive design for mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page title -->
+    <title>Register - MCDP</title>
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Back arrow link to return to homepage -->
+    <a href="{{ url_for('index') }}" class="back-arrow"><span class="arrow-symbol">&#x276E;</span> Back</a>
+    <!-- Container for registration form -->
+    <div class="container auth-container">
+        <!-- Page heading -->
+        <h2>Register</h2>
+        <!-- Display flashed messages (e.g., success or error) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <!-- Alert div with dynamic class based on category -->
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <!-- Registration form -->
+        <form method="POST" action="{{ url_for('register') }}">
+            <!-- Username input field -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <!-- Password input field -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <!-- Submit button -->
+            <button type="submit" class="calculate-btn">Register</button>
+        </form>
+        <!-- Link to login page -->
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a>.</p>
+    </div>
+</body>
+</html>
